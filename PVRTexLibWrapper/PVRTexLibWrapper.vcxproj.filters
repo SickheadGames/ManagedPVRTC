@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="PVRTexLibWrapper.cpp" />
+    <ClCompile Include="Stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PVRTexLibWrapper.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTArray.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTError.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTexLibVersion.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTexture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTextureFormat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTextureDefines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTextureHeader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTextureUtilities.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTGlobal.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTMap.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTString.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Libs\PVRTexLib\PVRTTexture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{03962c6c-42ad-4cf9-8682-64c47e0fafb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
