@@ -8,7 +8,7 @@ namespace ManagedPVRTC
 {
     public static class ManagedPVRTC
     {
-        [DllImport("PVRTexLibC", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("PVRTexLibWrapper", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr CompressTexture(byte[] data, int height, int width, int mipLevels, bool preMultiplied, bool pvrtc4bppCompression, ref IntPtr dataSizes);
     }
 }
