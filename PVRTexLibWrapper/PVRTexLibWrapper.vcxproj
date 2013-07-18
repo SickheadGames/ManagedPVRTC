@@ -72,6 +72,7 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin/$(Configuration)/x86/</OutDir>
     <IntDir>$(Configuration)/$(Platform)/</IntDir>
+    <TargetName>pvrtc</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -79,6 +80,7 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin/$(Configuration)/x64/</OutDir>
     <IntDir>$(Configuration)/$(Platform)/</IntDir>
+    <TargetName>pvrtc</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
