@@ -8,45 +8,68 @@
 
 using namespace pvrtexture;
 
-extern void* __cdecl CompressTexture(unsigned char* data, int height, int width, int mipLevels, bool preMultiplied, bool fourbppCompression, int** dataSizes)
-{   
-   PVRTextureHeaderV3 pvrHeader; 
+CPVRTexture* pvrTexture = NULL;
 
-   pvrHeader.u32Version = PVRTEX_CURR_IDENT; 
-   pvrHeader.u32Flags = preMultiplied ? PVRTEX3_PREMULTIPLIED : 0; 
-   pvrHeader.u64PixelFormat = PVRStandard8PixelType.PixelTypeID; 
-   pvrHeader.u32ColourSpace = ePVRTCSpacelRGB; 
-   pvrHeader.u32ChannelType = ePVRTVarTypeUnsignedByteNorm; 
-   pvrHeader.u32Height = height; 
-   pvrHeader.u32Width = width; 
-   pvrHeader.u32Depth = 1; 
-   pvrHeader.u32NumSurfaces = 1; 
-   pvrHeader.u32NumFaces = 1; 
-   pvrHeader.u32MIPMapCount = 1; 
-   pvrHeader.u32MetaDataSize = 0;
+extern void __cdecl CreateTexture(unsigned char* data, const uint32& u32Width, const uint32& u32Height, const uint32& u32Depth, const PixelType ptFormat, bool preMultiplied, const EPVRTVariableType eChannelType, const EPVRTColourSpace eColourspace)
+{
+    DestroyTexture();
 
-   CPVRTexture sTexture( pvrHeader, data );
+    PVRTextureHeaderV3 pvrHeader;
+    pvrHeader.u32Version = PVRTEX_CURR_IDENT;
+    pvrHeader.u32Flags = preMultiplied ? PVRTEX3_PREMULTIPLIED : 0;
+    pvrHeader.u64PixelFormat = ptFormat.PixelTypeID;
+    pvrHeader.u32ColourSpace = eColourspace;
+    pvrHeader.u32ChannelType = eChannelType;
+    pvrHeader.u32Width = u32Width;
+    pvrHeader.u32Height = u32Height;
+    pvrHeader.u32Depth = u32Depth;
+    pvrHeader.u32NumSurfaces = 1;
+    pvrHeader.u32NumFaces = 1;
+    pvrHeader.u32MIPMapCount = 1;
+    pvrHeader.u32MetaDataSize = 0;
+    pvrTexture = new CPVRTexture(pvrHeader, data);
+}
 
-   if (mipLevels > 1)
-      GenerateMIPMaps(sTexture, eResizeLinear, mipLevels);
+extern void __cdecl DestroyTexture()
+{
+    if (pvrTexture != NULL)
+    {
+        delete pvrTexture;
+        pvrTexture = NULL;
+    }
+}
 
-   auto bpp =  fourbppCompression ? ePVRTPF_PVRTCI_4bpp_RGBA : ePVRTPF_PVRTCI_2bpp_RGBA;
+extern bool __cdecl Resize(const uint32& u32NewWidth, const uint32& u32NewHeight, const uint32& u32NewDepth, const EResizeMode eResizeMode)
+{
+    if (pvrTexture == NULL)
+        return false;
+    return pvrtexture::Resize(*pvrTexture, u32NewWidth, u32NewHeight, u32NewDepth, eResizeMode);
+}
 
-   PixelType pixType(bpp);
-   Transcode(sTexture,
-            pixType, 
-            ePVRTVarTypeUnsignedByteNorm,
-            ePVRTCSpacelRGB );
+extern bool __cdecl GenerateMIPMaps(const EResizeMode eFilterMode, const uint32 uiMIPMapsToDo)
+{
+    if (pvrTexture == NULL)
+        return false;
+    return pvrtexture::GenerateMIPMaps(*pvrTexture, eFilterMode, uiMIPMapsToDo);
+}
 
-   *dataSizes = new int[mipLevels];
+extern bool __cdecl Transcode(const PixelType ptFormat, const EPVRTVariableType eChannelType, const EPVRTColourSpace eColourspace, const ECompressorQuality eQuality, const bool bDoDither)
+{
+    if (pvrTexture == NULL)
+        return false;
+    return pvrtexture::Transcode(*pvrTexture, ptFormat, eChannelType, eColourspace, eQuality, bDoDither);
+}
 
-   for(int x = 0; x < mipLevels; x++)
-     (*dataSizes)[x] = sTexture.getDataSize(x);
+extern const uint32 __cdecl GetTextureDataSize(int32 iMIPLevel)
+{
+    if (pvrTexture == NULL)
+        return 0;
+    return pvrTexture->getDataSize(iMIPLevel);
+}
 
-   int totalDataSize = sTexture.getDataSize();
-   auto returnData = new unsigned char[totalDataSize];
-
-   memcpy(returnData, sTexture.getDataPtr(), totalDataSize);
-   
-   return returnData;
+extern void __cdecl GetTextureData(unsigned char* data, uint32 dataSize, uint32 uiMIPLevel)
+{
+    if (pvrTexture == NULL)
+        return;
+    memcpy(data, pvrTexture->getDataPtr(uiMIPLevel), dataSize);
 }

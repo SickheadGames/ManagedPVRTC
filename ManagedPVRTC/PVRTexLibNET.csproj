@@ -8,8 +8,8 @@
     <ProjectGuid>{BAAF1192-884B-4DA2-8C93-E738C2F452A4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ManagedPVRTC</RootNamespace>
-    <AssemblyName>ManagedPVRTC</AssemblyName>
+    <RootNamespace>PVRTexLib</RootNamespace>
+    <AssemblyName>PVRTexLibNET</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagedPVRTC.cs" />
+    <Compile Include="PVRTexLibNET.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
